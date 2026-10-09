@@ -68,3 +68,37 @@
     }),
   );
 })();
+
+// Music: click the record to play or pause
+(() => {
+  const rec = document.getElementById("rec");
+  const cap = document.getElementById("recCap");
+  const audio = document.getElementById("music");
+  if (!rec || !audio) return;
+
+  audio.volume = 0.3;
+
+  const setState = (on) => {
+    rec.classList.toggle("playing", on);
+    rec.setAttribute("aria-pressed", on);
+    rec.setAttribute("aria-label", on ? "Pause music" : "Play music");
+    cap.textContent = on
+      ? "Now playing. Press to pause"
+      : "Press the record to play";
+  };
+
+  rec.addEventListener("click", async () => {
+    if (!audio.paused) {
+      audio.pause();
+      return setState(false);
+    }
+    try {
+      await audio.play();
+      setState(true);
+    } catch {
+      cap.textContent = "Music file not found. Add audio/theme.mp3";
+    }
+  });
+
+  audio.addEventListener("pause", () => setState(false));
+})();
