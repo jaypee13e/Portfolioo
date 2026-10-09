@@ -480,3 +480,15 @@ footer {
     transform: none !important;
   }
 }
+
+/* Music: the record is a play button */
+.rec {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  animation-play-state: paused;
+}
+
+.rec.playing {
+  animation-play-state: running;
+}
