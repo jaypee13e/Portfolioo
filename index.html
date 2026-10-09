@@ -1,125 +1,325 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Jaypee – Web Developer</title>
-<meta name="description" content="Jaypee is a Filipino web developer building fast, accessible websites and web apps. See selected projects and get in touch.">
-<meta property="og:title" content="Jaypee – Web Developer">
-<meta property="og:description" content="Fast, accessible websites and web apps, from first sketch to deploy.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
-<script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="wrap">
-  <header class="top">
-    <b>Jaypee</b>
-    <nav aria-label="Primary">
-      <a class="hide" href="#work">Work</a>
-      <a class="hide" href="#stack">Skills</a>
-      <a class="hide" href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <button class="icon-btn" id="theme" aria-label="Switch between light and dark">Theme</button>
-    </nav>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Jaypee – Web Developer</title>
+    <meta
+      name="description"
+      content="Jaypee is a Filipino web developer building fast, accessible websites and web apps. See selected projects and get in touch."
+    />
+    <meta property="og:title" content="Jaypee – Web Developer" />
+    <meta
+      property="og:description"
+      content="Fast, accessible websites and web apps, from first sketch to deploy."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      document.documentElement.className += " js";
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <b>Jaypee</b>
+        <nav aria-label="Primary">
+          <a class="hide" href="#work">Work</a>
+          <a class="hide" href="#stack">Skills</a>
+          <a class="hide" href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <button
+            class="icon-btn"
+            id="theme"
+            aria-label="Switch between light and dark"
+          >
+            Theme
+          </button>
+        </nav>
+      </header>
 
-  <main>
-    <div class="hero">
-      <div>
-      <h1 id="name" aria-label="Jaypee, web developer"><span>Jay</span><span>Pee</span></h1>
-      <p class="lede">I build fast, accessible websites and web apps, from the first sketch to the deploy button.</p>
-      <div class="status"><i></i>Open to freelance and full-time work</div>
-      <div class="cta">
-        <a class="btn" href="#work">See my work</a>
-        <a class="btn alt" href="#contact">Get in touch</a>
-      </div>
-      </div>
-      <div><div class="rec" role="img" aria-label="Spinning vinyl record"></div><span class="rec-cap">Vol. 1: web developer, on repeat</span></div>
+      <main>
+        <div class="hero">
+          <div>
+            <h1 id="name" aria-label="Jaypee, web developer">
+              <span>Jay</span><span>Pee</span>
+            </h1>
+            <p class="lede">
+              I build fast, accessible websites and web apps, from the first
+              sketch to the deploy button.
+            </p>
+            <div class="status">
+              <i></i>Open to freelance and full-time work
+            </div>
+            <div class="cta">
+              <a class="btn" href="#work">See my work</a>
+              <a class="btn alt" href="#contact">Get in touch</a>
+            </div>
+          </div>
+          <div>
+            <button
+              class="rec"
+              id="rec"
+              type="button"
+              aria-pressed="false"
+              aria-label="Play music"
+            ></button>
+            <span class="rec-cap" id="recCap">Press the record to play</span>
+            <audio id="music" src="audio/theme.mp3" loop preload="none"></audio>
+          </div>
+        </div>
+
+        <section id="work">
+          <h2>
+            Tracklist<small>Selected work. Press a track to open it.</small>
+          </h2>
+          <details open>
+            <summary>
+              <span class="t">Project one: Demo Community</span
+              ><span class="y">2026</span>
+            </summary>
+            <div class="body">
+              <div>
+                <p>
+                  <b>Problem:</b> A private community needed one place to share
+                  posts and photos, without the noise of a public social
+                  network.
+                </p>
+                <p>
+                  <b>What I did:</b> Built a working demo with a feed, likes,
+                  comments, reposts, saved posts, member profiles and
+                  notifications. It has a light/dark theme and a layout that
+                  switches from a side menu on desktop to a bottom tab bar on
+                  phones. The full version adds a Node/Express backend,
+                  Firestore, Cloudinary uploads and an Android app through
+                  Capacitor.
+                </p>
+                <ul class="tags">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                  <li>Express</li>
+                  <li>Firestore</li>
+                  <li>Cloudinary</li>
+                  <li>Capacitor</li>
+                </ul>
+                <p class="links">
+                  <a
+                    class="link"
+                    href="https://demo-community.onrender.com"
+                    target="_blank"
+                    rel="noopener"
+                    >Live site</a
+                  >
+                  &nbsp;
+                  <a
+                    class="link"
+                    href="https://github.com/jaypee13e/Demo-Community.git"
+                    target="_blank"
+                    rel="noopener"
+                    >Source code</a
+                  >
+                </p>
+              </div>
+              <img
+                class="shot"
+                src="123.png"
+                alt="Screenshot of the Demo Community feed with posts, likes and comments"
+                loading="lazy"
+              />
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span class="t">Project two: DEMO Openbook</span
+              ><span class="y">2025</span>
+            </summary>
+            <div class="body">
+              <div>
+                <p>
+                  <b>Problem:</b> Small businesses and community hosts juggle
+                  event sign-ups and one-on-one appointments across messages and
+                  spreadsheets, and guests forget to show up.
+                </p>
+                <p>
+                  <b>What I did:</b> Built an events and booking app in plain
+                  JavaScript. Guests browse a calendar, RSVP to events and book
+                  consultation slots. When an event is full, guests join a
+                  waitlist, and the next person moves in automatically if
+                  someone drops out. An admin page manages events, availability,
+                  bookings and a reminder queue. A demo clock lets you move time
+                  forward and watch the reminders go out. Everything is
+                  validated and escaped, and works in light and dark mode.
+                </p>
+                <ul class="tags">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                  <li>LocalStorage</li>
+                  <li>Notifications API</li>
+                </ul>
+                <p class="links">
+                  <a
+                    class="link"
+                    href="https://openbook-35zq.onrender.com"
+                    target="_blank"
+                    rel="noopener"
+                    >Live site</a
+                  >
+                  &nbsp;
+                  <a
+                    class="link"
+                    href="https://github.com/jaypee13e/Openbook"
+                    target="_blank"
+                    rel="noopener"
+                    >Source code</a
+                  >
+                </p>
+              </div>
+              <img
+                class="shot"
+                src="1234.png"
+                alt="Screenshot of the Demo Openbook events calendar and booking page"
+                loading="lazy"
+              />
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span class="t">Project three: DEMO Budget-Tracker</span
+              ><span class="y">2025</span>
+            </summary>
+            <div class="body">
+              <div>
+                <p>
+                  <b>Problem:</b> People need a simple way to track their income
+                  and expenses without using a complicated budgeting system. It
+                  can be difficult to see how much money comes in, where money
+                  is being spent, and what the current balance is.
+                </p>
+                <p>
+                  <b>What I did:</b> I built a React-based Budget Tracker that
+                  lets users add income and expenses with a description, amount,
+                  category, date, and currency. I added monthly filtering,
+                  income and expense summaries, a balance calculation, a
+                  six-month comparison chart, spending-by-category breakdown,
+                  and transaction deletion. I also used local storage so the
+                  data stays in the browser after the page is closed. I kept the
+                  design simple and responsive so it can work on both desktop
+                  and smaller screens.
+                </p>
+                <p>
+                  <b>Result:</b> The finished app gives users a clear view of
+                  their finances in one place. They can quickly see their
+                  income, expenses, and balance, review spending patterns across
+                  six months, manage individual transactions, and keep their
+                  data stored in the browser.
+                </p>
+                <ul class="tags">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                  <li>React(JSX)</li>
+                  <li>Vite</li>
+                  <li>Node.js</li>
+                </ul>
+                <p class="links">
+                  <a
+                    class="link"
+                    href="https://demo-budget-tracker.onrender.com"
+                    target="_blank"
+                    rel="noopener"
+                    >Live site</a
+                  >
+                  &nbsp;
+                  <a
+                    class="link"
+                    href="https://github.com/jaypee13e/DEMO-Budget-Tracker/tree/main/project%203"
+                    target="_blank"
+                    rel="noopener"
+                    >Source code</a
+                  >
+                </p>
+              </div>
+              <img
+                class="shot"
+                src="12345.png"
+                alt="Screenshot of the Demo Budget Tracker dashboard with income, expenses and charts"
+                loading="lazy"
+              />
+            </div>
+          </details>
+        </section>
+
+        <section id="stack">
+          <h2>Liner notes<small>What I work with.</small></h2>
+          <div class="cols">
+            <div>
+              <h3>Front end</h3>
+              <p>
+                Semantic HTML, modern CSS, JavaScript and TypeScript, React.
+                Responsive by default, keyboard friendly, tested on real phones.
+              </p>
+            </div>
+            <div>
+              <h3>Back end</h3>
+              <p>
+                Node and Express, REST APIs, Firebase and SQL databases,
+                authentication, file and image handling.
+              </p>
+            </div>
+            <div>
+              <h3>Craft</h3>
+              <p>
+                Performance budgets, accessibility checks, clean Git history,
+                and handoffs a client can actually follow.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="about">
+          <h2>About</h2>
+          <p class="about">
+            Hey, I'm Jaypee. I'm 20, Filipino, and I build websites. Ever since
+            my first one came to life on the screen, I've been hooked. I like
+            making sites that load fast, look clean, and just work. When I'm not
+            coding, I'm climbing ranks in Mobile Legends, playing rap on repeat,
+            or chilling somewhere green. Got a project? Let's build it.
+          </p>
+        </section>
+
+        <section id="contact">
+          <h2>Let's build something</h2>
+          <a class="mail" id="mail" href="mailto:Jaypoem0@gmail.com"
+            >Jaypoem0@gmail.com</a
+          >
+          <div class="cta">
+            <button class="btn alt" id="copy">Copy email</button>
+            <a class="btn alt" href="https://github.com/jaypee13e">GitHub</a>
+          </div>
+        </section>
+      </main>
+      <footer>
+        © <span id="yr">2026</span> Jaypee. Built by hand with HTML, CSS and a
+        little JavaScript.
+      </footer>
     </div>
 
-    <section id="work">
-      <h2>Tracklist<small>Selected work. Press a track to open it.</small></h2>
-      <details open>
-        <summary><span class="t">Project one: Demo Community</span><span class="y">2026</span></summary>
-        <div class="body">
-          <div>
-            <p><b>Problem:</b> A private community needed one place to share posts and photos, without the noise of a public social network.</p>
-            <p><b>What I did:</b> Built a working demo with a feed, likes, comments, reposts, saved posts, member profiles and notifications. It has a light/dark theme and a layout that switches from a side menu on desktop to a bottom tab bar on phones. The full version adds a Node/Express backend, Firestore, Cloudinary uploads and an Android app through Capacitor.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Express</li><li>Firestore</li><li>Cloudinary</li><li>Capacitor</li></ul>
-            <p class="links">
-                <a class="link" href="https://demo-community.onrender.com" target="_blank" rel="noopener">Live site</a> &nbsp; 
-                <a class="link" href="https://github.com/jaypee13e/Demo-Community.git" target="_blank" rel="noopener">Source code</a>
-            </p>
-          </div>
-          <img class="shot" src="123.png" alt="Screenshot of the Demo Community feed with posts, likes and comments" loading="lazy">
-        </div>
-      </details>
-
-      <details>
-        <summary><span class="t">Project two: DEMO Openbook</span><span class="y">2025</span></summary>
-        <div class="body">
-          <div>
-            <p><b>Problem:</b> Small businesses and community hosts juggle event sign-ups and one-on-one appointments across messages and spreadsheets, and guests forget to show up.</p>
-            <p><b>What I did:</b> Built an events and booking app in plain JavaScript. Guests browse a calendar, RSVP to events and book consultation slots. When an event is full, guests join a waitlist, and the next person moves in automatically if someone drops out. An admin page manages events, availability, bookings and a reminder queue. A demo clock lets you move time forward and watch the reminders go out. Everything is validated and escaped, and works in light and dark mode.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>LocalStorage</li><li>Notifications API</li></ul>
-            <p class="links">
-                <a class="link" href="https://openbook-35zq.onrender.com" target="_blank" rel="noopener">Live site</a> &nbsp; 
-                <a class="link" href="https://github.com/jaypee13e/Openbook" target="_blank" rel="noopener">Source code</a>
-            </p>
-          </div>
-          <img class="shot" src="1234.png" alt="Screenshot of the Demo Openbook events calendar and booking page" loading="lazy">
-        </div>
-      </details>
-
-      <details>
-        <summary><span class="t">Project three: DEMO Budget-Tracker</span><span class="y">2025</span></summary>
-        <div class="body">
-          <div>
-            <p><b>Problem:</b> People need a simple way to track their income and expenses without using a complicated budgeting system. It can be difficult to see how much money comes in, where money is being spent, and what the current balance is.</p>
-            <p><b>What I did:</b> I built a React-based Budget Tracker that lets users add income and expenses with a description, amount, category, date, and currency. I added monthly filtering, income and expense summaries, a balance calculation, a six-month comparison chart, spending-by-category breakdown, and transaction deletion. I also used local storage so the data stays in the browser after the page is closed. I kept the design simple and responsive so it can work on both desktop and smaller screens.</p>
-            <p><b>Result:</b> The finished app gives users a clear view of their finances in one place. They can quickly see their income, expenses, and balance, review spending patterns across six months, manage individual transactions, and keep their data stored in the browser.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React(JSX)</li><li>Vite</li><li>Node.js</li></ul>
-            <p class="links">
-                <a class="link" href="https://demo-budget-tracker.onrender.com" target="_blank" rel="noopener">Live site</a> &nbsp;
-                <a class="link" href="https://github.com/jaypee13e/DEMO-Budget-Tracker/tree/main/project%203" target="_blank" rel="noopener">Source code</a>
-            </p>
-          </div>
-          <img class="shot" src="12345.png" alt="Screenshot of the Demo Budget Tracker dashboard with income, expenses and charts" loading="lazy">
-        </div>
-      </details>
-    </section>
-
-    <section id="stack">
-      <h2>Liner notes<small>What I work with.</small></h2>
-      <div class="cols">
-        <div><h3>Front end</h3><p>Semantic HTML, modern CSS, JavaScript and TypeScript, React. Responsive by default, keyboard friendly, tested on real phones.</p></div>
-        <div><h3>Back end</h3><p>Node and Express, REST APIs, Firebase and SQL databases, authentication, file and image handling.</p></div>
-        <div><h3>Craft</h3><p>Performance budgets, accessibility checks, clean Git history, and handoffs a client can actually follow.</p></div>
-      </div>
-    </section>
-
-    <section id="about">
-      <h2>About</h2>
-      <p class="about"> Hey, I'm Jaypee. I'm 20, Filipino, and I build websites. Ever since my first one came to life on the screen, I've been hooked. I like making sites that load fast, look clean, and just work. When I'm not coding, I'm climbing ranks in Mobile Legends, playing rap on repeat, or chilling somewhere green. Got a project? Let's build it.
-</p>
-    </section>
-
-    <section id="contact">
-      <h2>Let's build something</h2>
-      <a class="mail" id="mail" href="mailto:Jaypoem0@gmail.com">Jaypoem0@gmail.com</a>
-      <div class="cta">
-        <button class="btn alt" id="copy">Copy email</button>
-        <a class="btn alt" href="https://github.com/jaypee13e">GitHub</a>
-      </div>
-    </section>
-  </main>
-  <footer>© <span id="yr">2026</span> Jaypee. Built by hand with HTML, CSS and a little JavaScript.</footer>
-</div>
-
-<script src="Script.js" defer></script>
-</body>
+    <script src="Script.js" defer></script>
+  </body>
 </html>
