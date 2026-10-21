@@ -75,6 +75,11 @@ button {
   padding: 0 clamp(1.25rem, 5vw, 3rem);
 }
 header.top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,7 +139,7 @@ nav a:hover {
   grid-template-columns: 1.25fr 1fr;
   align-items: center;
   gap: 2rem;
-  padding: clamp(2rem, 7vw, 5rem) 0 clamp(3rem, 8vw, 5rem);
+  padding: clamp(2rem, 6vw, 4rem) 0 0;
   overflow: hidden;
 }
 .hero h1 {
@@ -492,3 +497,119 @@ footer {
 .rec.playing {
   animation-play-state: running;
 }
+
+/* Hero stage: portrait stands in front of the record */
+.hero { align-items: end; }
+.hero > div:first-child { padding-bottom: clamp(3rem, 8vw, 5rem); align-self: center; }
+.stage {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 30rem);
+  aspect-ratio: 4 / 5;
+}
+.stage .rec {
+  position: absolute;
+  top: 4%;
+  right: 0;
+  width: 80%;
+  z-index: 1;
+}
+.stage .me {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 88%;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+}
+.stage .rec-cap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  margin: 0;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.85rem;
+  transform: rotate(4deg);
+}
+@media (max-width: 46rem) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .stage { width: 100%; max-width: 24rem; }
+  .stage .rec-cap { right: 2%; font-size: 0.8rem; }
+  .stage .rec { width: 78%; right: 0; justify-self: auto; }
+  .hero > div:first-child { padding-bottom: 2rem; }
+}
+
+/* ---- v2: smooth + polish ---- */
+html{scroll-behavior:smooth}
+::selection{background:var(--accent);color:var(--accent-ink)}
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;z-index:50}
+header.top nav a{position:relative;transition:color .3s}
+header.top nav a.hide::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+header.top nav a.hide:hover::after,header.top nav a.on::after{transform:scaleX(1)}
+header.top nav a.on{color:var(--ink)}
+.btn{transition:transform .5s var(--ease),box-shadow .5s var(--ease),background .3s}
+.btn:hover{box-shadow:0 .8rem 1.6rem -.6rem var(--accent)}
+.btn:active{transform:scale(.97)}
+.stage .me{transform:translate3d(calc(var(--px,0)*8px),calc(var(--py,0)*4px),0);transition:transform .8s var(--ease)}
+.stage .rec{translate:calc(var(--px,0)*-18px) calc(var(--py,0)*-10px);transition:translate .8s var(--ease)}
+.js .stage .me{opacity:0;animation:emerge 1.3s .25s var(--ease) forwards}
+.js .stage .rec{opacity:0;animation:spin 9s linear infinite,fade 1s .1s var(--ease) forwards}
+@keyframes emerge{from{opacity:0;clip-path:inset(18% 0 0 0);margin-bottom:-4rem}to{opacity:1;clip-path:inset(-10% -10% 0 -10%);margin-bottom:0}}
+@keyframes fade{to{opacity:1}}
+.ticker{overflow:hidden;border-top:3px solid var(--ink);border-bottom:1px solid var(--line);background:var(--panel);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ticker .track{display:flex;width:max-content;animation:tick 38s linear infinite}
+.ticker:hover .track{animation-play-state:paused}
+.ticker span{padding:.9rem 1.6rem;font-weight:700;font-size:1.1rem;white-space:nowrap}
+.ticker span::after{content:"";display:inline-block;width:.45rem;height:.45rem;margin-left:3.2rem;border-radius:50%;background:var(--accent)}
+@keyframes tick{to{transform:translateX(-50%)}}
+section{border-top:0}
+#work{border-top:0}
+.js .reveal{opacity:0;transform:translateY(36px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+.js .cols>div,.js .tags li{transition:transform .5s var(--ease),border-color .3s}
+.cols>div:hover{transform:translateY(-6px)}
+.tags li{transition:background .3s,color .3s,transform .4s var(--ease)}
+.tags li:hover{background:var(--ink);color:var(--bg);transform:translateY(-2px)}
+details{transition:background .4s}
+details:hover:not([open]){background:color-mix(in srgb,var(--panel) 55%,transparent)}
+img.shot{transition:transform .8s var(--ease),box-shadow .8s var(--ease)}
+img.shot:hover{transform:translate(-4px,-4px);box-shadow:1rem 1rem 0 var(--accent)}
+.mail{background:linear-gradient(var(--accent),var(--accent)) 0 100%/0 100% no-repeat;transition:background-size .6s var(--ease),color .4s}
+.mail:hover{background-size:100% 100%;color:var(--accent-ink)}
+@media (prefers-reduced-motion:reduce){.js .reveal,.js .stage .me,.js .stage .rec{opacity:1!important;transform:none!important;clip-path:none!important}.ticker .track{animation:none!important}}
+.js .stage .rec{animation-play-state:paused,running}
+.js .stage .rec.playing{animation-play-state:running,running}
+main,.wrap{min-width:0}
+.ticker{contain:inline-size;max-width:100%}
+html,body{overflow-x:clip}
+
+/* ---- tracklist deck ---- */
+.deck{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+.deck .slide{display:none;border:0}
+.deck .slide.active{display:block;animation:slideNext .7s var(--ease)}
+.deck[data-dir="prev"] .slide.active{animation-name:slidePrev}
+@keyframes slideNext{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:none}}
+@keyframes slidePrev{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
+.deck summary{cursor:default}
+.deck summary:hover .t{transform:none}
+.deck .slide::details-content{block-size:auto;opacity:1}
+.deck-ctl{display:flex;align-items:center;gap:1rem;margin-top:1.4rem}
+.deck-ctl .count{font-weight:700;font-variant-numeric:tabular-nums;color:var(--mute)}
+.deck-ctl .dots{display:flex;gap:.5rem;margin-left:auto}
+.deck-ctl .dots button{width:.7rem;height:.7rem;padding:0;border:2px solid var(--ink);border-radius:999px;background:none;cursor:pointer;transition:width .5s var(--ease),background .3s}
+.deck-ctl .dots button.on{width:2rem;background:var(--accent);border-color:var(--accent)}
+.arrow{width:3.2rem;height:3.2rem;border-radius:50%;border:3px solid var(--ink);background:var(--bg);color:var(--ink);font-size:1.4rem;font-weight:700;cursor:pointer;transition:transform .5s var(--ease),background .3s,color .3s,border-color .3s}
+.arrow[data-d="1"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.arrow:hover{transform:scale(1.1)}
+.arrow[data-d="-1"]:hover{background:var(--ink);color:var(--bg)}
+.arrow:active{transform:scale(.94)}
+.arrow:focus-visible,.dots button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.deck-ctl{order:0}
+
+.deck summary .t::before{content:var(--n)}
+section[id]{scroll-margin-top:5rem}
