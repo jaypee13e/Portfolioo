@@ -60,13 +60,38 @@
     h1.addEventListener("pointerleave", () => h1.style.setProperty("--w", 300));
   }
 
-  // Opening one project closes the others
-  const items = document.querySelectorAll("#work details");
-  items.forEach((d) =>
-    d.addEventListener("toggle", () => {
-      if (d.open) items.forEach((o) => o !== d && (o.open = false));
-    }),
-  );
+  // Tracklist: one project at a time, arrows to browse
+  const slides = [...document.querySelectorAll("#work details")];
+  const work = document.getElementById("work");
+  if (slides.length > 1) {
+    const deck = document.createElement("div");
+    deck.className = "deck";
+    slides[0].before(deck);
+    slides.forEach((d, i) => { d.style.setProperty("--n", '"0' + (i + 1) + '"'); d.open = true; d.classList.add("slide"); deck.append(d); d.querySelector("summary").addEventListener("click", (e) => e.preventDefault()); });
+    const ctl = document.createElement("div");
+    ctl.className = "deck-ctl";
+    ctl.innerHTML = '<button type="button" class="arrow" data-d="-1" aria-label="Previous project">←</button><div class="dots" role="tablist"></div><span class="count" aria-live="polite"></span><button type="button" class="arrow" data-d="1" aria-label="Next project">→</button>';
+    deck.after(ctl);
+    const dots = ctl.querySelector(".dots"), count = ctl.querySelector(".count");
+    slides.forEach((_, i) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Project " + (i + 1)); b.onclick = () => go(i); dots.append(b); });
+    let cur = 0;
+    function go(n) {
+      const next = (n + slides.length) % slides.length;
+      deck.dataset.dir = n >= cur ? "next" : "prev";
+      slides.forEach((s, i) => s.classList.toggle("active", i === next));
+      [...dots.children].forEach((b, i) => b.classList.toggle("on", i === next));
+      count.textContent = String(next + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
+      cur = next;
+    }
+    ctl.addEventListener("click", (e) => { const a = e.target.closest(".arrow"); a && go(cur + +a.dataset.d); });
+    work.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") go(cur + 1); if (e.key === "ArrowLeft") go(cur - 1); });
+    let x0 = null;
+    deck.addEventListener("pointerdown", (e) => (x0 = e.clientX));
+    deck.addEventListener("pointerup", (e) => { if (x0 !== null && Math.abs(e.clientX - x0) > 60) go(cur + (e.clientX < x0 ? 1 : -1)); x0 = null; });
+    go(0);
+    const sub = work.querySelector("h2 small");
+    if (sub) sub.textContent = "Selected work. Use the arrows to browse.";
+  }
 })();
 
 // Music: click the record to play or pause
@@ -101,4 +126,42 @@
   });
 
   audio.addEventListener("pause", () => setState(false));
+})();
+
+// ---- v2: smooth motion ----
+(() => {
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const bar = document.getElementById("bar");
+  let tick = false;
+  const onScroll = () => {
+    if (tick) return; tick = true;
+    requestAnimationFrame(() => {
+      const d = document.documentElement;
+      bar.style.transform = `scaleX(${d.scrollTop / Math.max(1, d.scrollHeight - innerHeight)})`;
+      tick = false;
+    });
+  };
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+  const links = [...document.querySelectorAll("nav a.hide")];
+  const spy = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.hash === "#" + e.target.id));
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  links.forEach((a) => { const s = document.querySelector(a.hash); s && spy.observe(s); });
+
+  const stage = document.querySelector(".stage");
+  if (stage && !still && matchMedia("(pointer: fine)").matches) {
+    const hero = document.querySelector(".hero");
+    hero.addEventListener("pointermove", (e) => {
+      const r = hero.getBoundingClientRect();
+      stage.style.setProperty("--px", ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+      stage.style.setProperty("--py", ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+    });
+    hero.addEventListener("pointerleave", () => { stage.style.setProperty("--px", 0); stage.style.setProperty("--py", 0); });
+  }
 })();
