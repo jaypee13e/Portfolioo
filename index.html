@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="progress" id="bar"></div>
     <div class="wrap">
       <header class="top">
         <b>Jaypee</b>
@@ -68,7 +69,7 @@
               <a class="btn alt" href="#contact">Get in touch</a>
             </div>
           </div>
-          <div>
+          <div class="stage">
             <button
               class="rec"
               id="rec"
@@ -76,12 +77,24 @@
               aria-pressed="false"
               aria-label="Play music"
             ></button>
+            <picture>
+              <source srcset="jaypee.webp" type="image/webp" />
+              <img
+                class="me"
+                src="jaypee.png"
+                width="768"
+                height="1056"
+                alt="Illustrated portrait of Jaypee in glasses and a grey tee, holding a phone"
+              />
+            </picture>
             <span class="rec-cap" id="recCap">Press the record to play</span>
             <audio id="music" src="audio/theme.mp3" loop preload="none"></audio>
           </div>
         </div>
 
-        <section id="work">
+        <div class="ticker" aria-hidden="true"><div class="track"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>Node.js</span><span>Express</span><span>Firestore</span><span>Vite</span><span>Capacitor</span><span>Accessibility</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>Node.js</span><span>Express</span><span>Firestore</span><span>Vite</span><span>Capacitor</span><span>Accessibility</span></div></div>
+
+        <section id="work" class="reveal">
           <h2>
             Tracklist<small>Selected work. Press a track to open it.</small>
           </h2>
@@ -265,7 +278,7 @@
           </details>
         </section>
 
-        <section id="stack">
+        <section id="stack" class="reveal">
           <h2>Liner notes<small>What I work with.</small></h2>
           <div class="cols">
             <div>
@@ -292,7 +305,7 @@
           </div>
         </section>
 
-        <section id="about">
+        <section id="about" class="reveal">
           <h2>About</h2>
           <p class="about">
             Hey, I'm Jaypee. I'm 20, Filipino, and I build websites. Ever since
@@ -303,7 +316,7 @@
           </p>
         </section>
 
-        <section id="contact">
+        <section id="contact" class="reveal">
           <h2>Let's build something</h2>
           <a class="mail" id="mail" href="mailto:Jaypoem0@gmail.com"
             >Jaypoem0@gmail.com</a
