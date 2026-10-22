@@ -6,15 +6,17 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Jaypee – Web Developer</title>
-    <meta
-      name="description"
-      content="Jaypee is a Filipino web developer building fast, accessible websites and web apps. See selected projects and get in touch."
-    />
-    <meta property="og:title" content="Jaypee – Web Developer" />
+    <title>Jaypee – Freelance Web Developer for Businesses</title>
+    <meta name="description" content="Jaypee is a freelance web developer in the Philippines building responsive, professional business websites, landing pages and product showcase sites. Browse projects and request a quote." />
+    <link rel="canonical" href="https://jaypee13e.github.io/Portfolioo/" />
+    <meta property="og:title" content="Jaypee – Freelance Web Developer for Businesses" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jaypee13e.github.io/Portfolioo/" />
+    <meta property="og:image" content="https://jaypee13e.github.io/Portfolioo/jaypee.png" />
+    <meta name="twitter:card" content="summary" />
     <meta
       property="og:description"
-      content="Fast, accessible websites and web apps, from first sketch to deploy."
+      content="Responsive, professional websites for businesses of all sizes. See my projects and request a quote."
     />
     <link
       rel="icon"
@@ -36,37 +38,35 @@
     <div class="wrap">
       <header class="top">
         <b>Jaypee</b>
-        <nav aria-label="Primary">
-          <a class="hide" href="#work">Work</a>
+        <nav id="nav" aria-label="Primary">
+          <a class="hide" href="#work">Projects</a>
+          <a class="hide" href="#services">Services</a>
+          <a class="hide" href="#process">Process</a>
+          <a class="hide" href="#pricing">Packages</a>
+          <a class="hide" href="#planner">Plan</a>
+          <a class="hide" href="#faq">FAQ</a>
           <a class="hide" href="#stack">Skills</a>
           <a class="hide" href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <button
-            class="icon-btn"
-            id="theme"
-            aria-label="Switch between light and dark"
-          >
-            Theme
-          </button>
+          <a class="hide" href="#contact">Contact</a>
         </nav>
+        <div class="actions">
+          <button class="icon-btn" id="theme" type="button" aria-label="Switch between light and dark">Theme</button>
+          <button class="icon-btn menu-btn" id="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+        </div>
       </header>
 
       <main>
         <div class="hero">
           <div>
-            <h1 id="name" aria-label="Jaypee, web developer">
-              <span>Jay</span><span>Pee</span>
-            </h1>
+            <p class="kicker">Jaypee, freelance web developer</p>
+            <h1 id="name"><span>I Build Websites for</span> <span>Businesses of All Sizes.</span></h1>
             <p class="lede">
-              I build fast, accessible websites and web apps, from the first
-              sketch to the deploy button.
+              I create modern, responsive, and professional websites that help businesses showcase their services, reach more customers, and grow their online presence — whether you're a small startup or an established company.
             </p>
-            <div class="status">
-              <i></i>Open to freelance and full-time work
-            </div>
+            <div class="status"><i></i>Open to freelance and full-time work</div>
             <div class="cta">
-              <a class="btn" href="#work">See my work</a>
-              <a class="btn alt" href="#contact">Get in touch</a>
+              <a class="btn" href="#work">View My Projects</a>
+              <a class="btn alt" href="#contact">Let's Build Your Website</a>
             </div>
           </div>
           <div class="stage">
@@ -84,7 +84,7 @@
                 src="jaypee.png"
                 width="768"
                 height="1056"
-                alt="jaypee.png"
+                alt="Portrait of Jaypee, freelance web developer"
               />
             </picture>
             <span class="rec-cap" id="recCap">Press the record to play</span>
@@ -96,7 +96,7 @@
 
         <section id="work" class="reveal">
           <h2>
-            PROJECTS<small>Selected work. Press a project to open it.</small>
+            Projects<small>Selected work. These are portfolio demos built to show what I can make; they are not real client sites.</small>
           </h2>
           <details open>
             <summary>
@@ -105,6 +105,7 @@
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Web app · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> A private community needed one place to share
                   posts and photos, without the noise of a public social
@@ -152,7 +153,7 @@
               </div>
               <img
                 class="shot"
-                src="123.png"
+                src="123.webp" width="2200" height="1701"
                 alt="Screenshot of the Demo Community feed with posts, likes and comments"
                 loading="lazy"
               />
@@ -166,6 +167,7 @@
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Booking web app · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> Small businesses and community hosts juggle
                   event sign-ups and one-on-one appointments across messages and
@@ -212,7 +214,7 @@
               </div>
               <img
                 class="shot"
-                src="1234.png"
+                src="1234.webp" width="1400" height="745"
                 alt="Screenshot of the Demo Openbook events calendar and booking page"
                 loading="lazy"
               />
@@ -226,6 +228,7 @@
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Web app (React) · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> People need a simple way to track their income
                   and expenses without using a complicated budgeting system. It
@@ -278,7 +281,7 @@
               </div>
               <img
                 class="shot"
-                src="12345.png"
+                src="12345.webp" width="1400" height="745"
                 alt="Screenshot of the Demo Budget Tracker dashboard with income, expenses and charts"
                 loading="lazy"
               />
@@ -287,11 +290,12 @@
 
            <details>
             <summary>
-              <span class="t">Project: Hearth & Crumb (2025)</span
+              <span class="t">Project: Hearth &amp; Crumb (2025)</span
               ><span class="y">2025</span>
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Bakery website · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> Small bakeries need a simple way to showcase their products and help customers browse the menu, choose items, and arrange pickup orders. 
                   Without an organized website, customers may have difficulty finding product details, prices, and opening hours.
@@ -303,8 +307,7 @@
                   Designed the website to work on desktop and mobile devices
                 </p>
                 <p>
-                  <b>Result:</b> Created an interactive online shop demo that allows customers to browse candles, wax melts, and gift sets, manage their cart, and calculate order totals with shipping costs.
-                  The project demonstrates my skills in JavaScript, DOM manipulation, responsive web design, form validation, and browser storage. The checkout is for demonstration purposes only, and no real payments are processed.
+                  <b>Result:</b> Created an interactive bakery website demo where customers can browse the menu by category, build a cart, choose a pickup date and time, and see an order summary. The checkout is for demonstration only and no real orders or payments are processed.
                 </p>
                 <ul class="tags">
                   <li>HTML</li>
@@ -331,8 +334,8 @@
               </div>
               <img
                 class="shot"
-                src="4.png"
-                alt="Screenshot of Hearth & Crumb page"
+                src="4.webp" width="1400" height="745"
+                alt="Screenshot of the Hearth &amp; Crumb bakery homepage"
                 loading="lazy"
               />
             </div>
@@ -340,11 +343,12 @@
 
            <details>
             <summary>
-              <span class="t">Project: Northgate Realty (2024)</span
+              <span class="t">Project: Ember &amp; Pine (2024)</span
               ><span class="y">2024</span>
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Online shop · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> Small candle businesses need a simple way to showcase their products and help customers browse different candle scents, compare prices, and choose items. 
                   Without an organized online shop, customers may find it difficult to explore product options, manage their cart, and calculate shipping costs.
@@ -383,8 +387,8 @@
               </div>
               <img
                 class="shot"
-                src="5.png"
-                alt="Screenshot of Northgate Realty page"
+                src="5.webp" width="1400" height="745"
+                alt="Screenshot of the Ember &amp; Pine candle shop homepage"
                 loading="lazy"
               />
             </div>
@@ -392,11 +396,12 @@
 
            <details>
             <summary>
-              <span class="t">Project: Ember & Pine (2024)</span
+              <span class="t">Project: Northgate Realty (2024)</span
               ><span class="y">2024</span>
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Real estate website · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> People searching for a home need an easy way to browse property listings, compare prices, and find properties that match their needs.
                   They may also need help estimating monthly mortgage payments before choosing a property.
@@ -435,8 +440,8 @@
               </div>
               <img
                 class="shot"
-                src="6.png"
-                alt="Screenshot of  Ember & Pine page"
+                src="6.webp" width="1400" height="745"
+                alt="Screenshot of the Northgate Realty homepage with the headline Find the home that fits your life"
                 loading="lazy"
               />
             </div>
@@ -444,11 +449,12 @@
 
           <details>
             <summary>
-              <span class="t">Project: Hale & Okafor (2026)</span
+              <span class="t">Project: Hale &amp; Okafor (2026)</span
               ><span class="y">2026</span>
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Accounting firm website · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> Small businesses need reliable accounting and financial support to manage bookkeeping, taxes, payroll, and business expenses.
                   Finding suitable services and understanding the estimated costs can be difficult without clear information.
@@ -456,7 +462,7 @@
                 <p>
                   <b>What I did:</b> Built a responsive accounting and advisory website using HTML, CSS, and JavaScript. 
                   Added service information, an interactive monthly fee estimator, service selection options, adjustable transaction and employee counts, team profiles, and a consultation booking form.
-                  Included form validation, estimated pricing breakdowns, preferred appointment scheduling, and light and dark themes.
+                  Included form validation, estimated pricing breakdowns, preferred appointment scheduling, and light and dark themes.</p>
                  <p>
                   <b>Result:</b> Created an interactive accounting website demo that helps users explore financial services, estimate monthly fees based on their needs, and submit consultation requests.
                    The project demonstrates my skills in responsive web design, JavaScript interactivity, calculations, form validation, and user-friendly interface development. The consultation form is a demo and does not send real messages.
@@ -486,8 +492,8 @@
               </div>
               <img
                 class="shot"
-                src="7.png"
-                alt="Screenshot of Hale & Okafor page"
+                src="7.webp" width="1400" height="745"
+                alt="Screenshot of the Hale &amp; Okafor accounting homepage"
                 loading="lazy"
               />
             </div>
@@ -495,11 +501,12 @@
 
           <details>
             <summary>
-              <span class="t">Project: Brightwater & Dental (2026)</span
+              <span class="t">Project: Brightwater Dental (2026)</span
               ><span class="y">2026</span>
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Dental clinic website · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> Patients may find it difficult to learn about dental services, compare treatment prices, and arrange appointments without contacting the clinic directly.
                   Dental clinics need an accessible website that provides important information and makes the appointment process easier.
@@ -507,7 +514,7 @@
                 <p>
                   <b>What I did:</b> Built a responsive dental clinic website using HTML, CSS, and JavaScript. 
                   Added dental service information, estimated prices, appointment scheduling, patient information forms, dentist profiles, a first-visit checklist, and frequently asked questions. 
-                  Included form validation and a user-friendly layout for desktop and mobile devices.
+                  Included form validation and a user-friendly layout for desktop and mobile devices.</p>
                  <p>
                   <b>Result:</b> Created an interactive dental clinic website demo that helps patients explore services, review estimated prices, and enter their appointment details.
                    The project demonstrates my skills in JavaScript, responsive web design, form validation, and interactive interface development.
@@ -537,8 +544,8 @@
               </div>
               <img
                 class="shot"
-                src="8.png"
-                alt="Screenshot of Brightwater & Dental page"
+                src="8.webp" width="1400" height="745"
+                alt="Screenshot of the Brightwater Dental clinic homepage"
                 loading="lazy"
               />
             </div>
@@ -551,6 +558,7 @@
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Fitness studio website · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> Fitness studios need an easy way for members to explore class schedules, compare membership plans, and book fitness sessions.
                   Without an organized website, customers may struggle to find suitable classes, check availability, and learn about membership options.
@@ -558,7 +566,7 @@
                 <p>
                   <b>What I did:</b> Built a responsive fitness studio website using HTML, CSS, and JavaScript. 
                   Added a weekly class schedule, class filters, booking and cancellation features, membership plans, coach profiles, a free-trial registration form, and frequently asked questions.
-                  Designed a user-friendly interface for desktop and mobile devices.
+                  Designed a user-friendly interface for desktop and mobile devices.</p>
                  <p>
                   <b>Result:</b> Created an interactive fitness studio website demo that allows users to browse classes, manage their selected sessions, compare membership plans, and register for a free trial.
                    The project demonstrates my skills in JavaScript, responsive web design, interactive features, and form validation.
@@ -588,8 +596,8 @@
               </div>
               <img
                 class="shot"
-                src="9.png"
-                alt="Screenshot of Ironleaf  page"
+                src="9.webp" width="1400" height="745"
+                alt="Screenshot of the Ironleaf fitness studio homepage"
                 loading="lazy"
               />
             </div>
@@ -602,13 +610,14 @@
             </summary>
             <div class="body">
               <div>
+                <p class="cat">Auto care website · Portfolio demo project</p>
                 <p>
                   <b>Problem:</b> Car repair and detailing shops need an easy way for customers to explore services, estimate costs, and request appointments.
                   Without an organized website, customers may find it difficult to compare service prices and arrange a visit.
                 </p>
                 <p>
                   <b>What I did:</b> Built a responsive car repair and detailing website using HTML, CSS, and JavaScript. Added an instant price estimator, vehicle size and service selections, a before-and-after detailing comparison slider, an online booking form, and a frequently asked questions section.
-                  Designed a user-friendly interface for desktop and mobile devices.
+                  Designed a user-friendly interface for desktop and mobile devices.</p>
                  <p>
                   <b>Result:</b> Created an interactive car care website demo that allows users to explore services, estimate repair and detailing costs, compare before-and-after results, and request bookings online.
                    The project demonstrates my skills in JavaScript, responsive web design, interactive features, and form validation.
@@ -638,63 +647,163 @@
               </div>
               <img
                 class="shot"
-                src="10.png"
-                alt="Screenshot of Gearhouse-Auto-Care page"
+                src="10.webp" width="1400" height="745"
+                alt="Screenshot of the Gearhouse Auto Care homepage"
                 loading="lazy"
               />
             </div>
           </details>
         </section>
 
-        <section id="stack" class="reveal">
-          <h2>Liner notes<small>What I work with.</small></h2>
+        <section id="services" class="reveal">
+          <h2>Services<small>What you can hire me to build.</small></h2>
           <div class="cols">
+            <div><h3>Business Website Development</h3><p>Professional websites that introduce your business, showcase your services, share company information, and help customers get in touch.</p></div>
+            <div><h3>Landing Page Development</h3><p>Focused landing pages for businesses, products, services, and promotional campaigns.</p></div>
+            <div><h3>Product Showcase Websites</h3><p>Websites that display products, images, descriptions, and contact or ordering information.</p></div>
+            <div><h3>Website Redesign</h3><p>Improvements to the design, layout, usability, and responsiveness of an existing website.</p></div>
+            <div><h3>Website Maintenance</h3><p>Content updates, minor bug fixes, and other small maintenance tasks.</p></div>
+          </div>
+          <p class="cta"><a class="btn" href="#contact">Discuss Your Project</a></p>
+        </section>
+
+        <section id="process" class="reveal">
+          <h2>How I work<small>Four steps from first message to launch.</small></h2>
+          <ol class="cols steps">
+            <li><h3>Discovery</h3><p>I learn about your business, goals, target customers, and what the website needs to do.</p></li>
+            <li><h3>Planning and Design</h3><p>I plan the website structure, layout, and visual appearance.</p></li>
+            <li><h3>Development</h3><p>I build the website and test its features and how it looks on different screen sizes.</p></li>
+            <li><h3>Review and Launch</h3><p>We review the finished website together, make the agreed revisions, and prepare it for launch.</p></li>
+          </ol>
+        </section>
+
+        <section id="pricing" class="reveal">
+          <h2>Website packages<small>Final price depends on your project's scope and the features you need, so every quote is based on a short conversation.</small></h2>
+          <div class="cols pkgs">
             <div>
-              <h3>Front end</h3>
-              <p>
-                Semantic HTML, modern CSS, JavaScript and TypeScript, React.
-                Responsive by default, keyboard friendly, tested on real phones.
-              </p>
+              <h3>Starter Website</h3>
+              <ul><li>A simple landing page</li><li>Responsive design</li><li>Essential business information</li><li>Contact options</li></ul>
+              <a class="btn alt" href="#inquiry" data-type="Landing page">Request a Quote</a>
             </div>
             <div>
-              <h3>Back end</h3>
-              <p>
-                Node and Express, REST APIs, Firebase and SQL databases,
-                authentication, file and image handling.
-              </p>
+              <h3>Business Website</h3>
+              <ul><li>Multiple pages or sections as required</li><li>Services or product showcase</li><li>Contact or inquiry options</li><li>Responsive design</li></ul>
+              <a class="btn alt" href="#inquiry" data-type="Business website">Request a Quote</a>
             </div>
             <div>
-              <h3>Craft</h3>
-              <p>
-                Performance budgets, accessibility checks, clean Git history,
-                and handoffs a client can actually follow.
-              </p>
+              <h3>Custom Website</h3>
+              <ul><li>Features based on your needs</li><li>Custom layout and functionality</li><li>Scope set after we discuss requirements</li></ul>
+              <a class="btn alt" href="#inquiry" data-type="Something else / not sure yet">Request a Quote</a>
             </div>
+          </div>
+        </section>
+
+        <section id="why" class="reveal">
+          <h2>Why work with me<small>What you can expect on every project.</small></h2>
+          <div class="cols">
+            <div><h3>Works on every screen</h3><p>Responsive layouts that I check on different screen sizes.</p></div>
+            <div><h3>Easy for visitors to use</h3><p>User-friendly layouts, so customers can find what they need.</p></div>
+            <div><h3>Organized code</h3><p>Clean, readable code that is easier to update later.</p></div>
+            <div><h3>Attention to detail</h3><p>Spacing, text, links, and forms get checked before launch.</p></div>
+            <div><h3>Clear communication</h3><p>You hear from me throughout development, not just at the end.</p></div>
+            <div><h3>Built around your needs</h3><p>Features are chosen for your project, not copied from a template.</p></div>
+          </div>
+        </section>
+
+        <section id="stack" class="reveal">
+          <h2>Skills<small>What I use, based on the projects above.</small></h2>
+          <div class="cols">
+            <div><h3>Front end</h3><p>Semantic HTML, modern CSS, JavaScript, and React with Vite. Responsive layouts that work with a keyboard.</p></div>
+            <div><h3>Back end</h3><p>Node.js and Express, Firestore, and image uploads with Cloudinary. Android packaging with Capacitor.</p></div>
+            <div><h3>Quality</h3><p>Responsive design, form validation, accessibility basics, browser testing and debugging, and Git and GitHub for version control.</p></div>
           </div>
         </section>
 
         <section id="about" class="reveal">
           <h2>About</h2>
           <p class="about">
-            Hey, I'm Jaypee. I'm 20, Filipino, and I build websites. Ever since
-            my first one came to life on the screen, I've been hooked. I like
-            making sites that load fast, look clean, and just work. When I'm not
-            coding, I'm climbing ranks in Mobile Legends, playing rap on repeat,
-            or chilling somewhere green. Got a project? Let's build it.
+            Hi, I'm Jaypee, a 20-year-old Filipino freelance web developer. I build clean, fast websites for businesses of different sizes, and I like making sites that look good and just work. Ever since my first one came to life on the screen, I've been hooked. When I'm not coding, I'm climbing ranks in Mobile Legends, playing rap on repeat, or chilling somewhere green.
           </p>
         </section>
 
+        <section id="faq" class="reveal faq">
+          <h2>FAQ<small>Pricing, timelines, revisions, hosting, and maintenance all depend on the agreed project scope.</small></h2>
+          <details><summary>What types of websites do you build?</summary><p>Business websites, landing pages, product showcase sites, and redesigns of existing sites. You can see examples in the Projects section.</p></details>
+          <details><summary>Do you work with small and large businesses?</summary><p>Yes. I build websites for startups, small businesses, and established companies. The scope changes with the size of the project, not the quality of the work.</p></details>
+          <details><summary>How long does it take to build a website?</summary><p>It depends on the number of pages, the features, and how quickly content and feedback come in. I'll give you a timeline after reviewing your requirements.</p></details>
+          <details><summary>How much does a website cost?</summary><p>The price depends on the scope and the features you need. I don't list fixed prices, so please request a quote and I'll reply after reviewing your project.</p></details>
+          <details><summary>Can you redesign an existing website?</summary><p>Yes. I can improve the design, layout, usability, and mobile experience of a site you already have.</p></details>
+          <details><summary>Will my website work on mobile devices?</summary><p>Yes. I build responsive layouts and check them at different screen sizes.</p></details>
+          <details><summary>Can I request changes?</summary><p>Yes. We agree on the number of revision rounds before the project starts, so both of us know what to expect.</p></details>
+          <details><summary>Can you help publish the website?</summary><p>I can help you prepare the site for launch. Hosting and domain options depend on your needs and will be discussed in the project plan.</p></details>
+          <details><summary>Do you provide website maintenance?</summary><p>I can help with content updates and minor bug fixes. What is included is agreed per project.</p></details>
+          <details><summary>What information should I prepare before starting?</summary><p>Your business name, what you offer, who your customers are, any logo or photos you have, examples of websites you like, your timeframe, and a rough budget. The planner below helps you organize this.</p></details>
+        </section>
+
+        <section id="planner" class="reveal">
+          <h2>Plan Your Website<small>Answer a few questions and get a summary you can send me. This is a planning aid, not a quotation. Final scope, price, and schedule need my review.</small></h2>
+          <form id="planner-form" class="form planner" novalidate>
+            <p class="pl-prog" id="pl-prog" aria-live="polite"></p>
+            <progress id="pl-bar" max="5" value="1" aria-label="Planner progress"></progress>
+            <fieldset class="pl-step" tabindex="-1"><legend>Business information</legend>
+              <div class="f"><label for="p-company">Business or company name</label><input id="p-company" name="pcompany" autocomplete="organization" /><small class="err" id="pe-company"></small></div>
+              <div class="f"><label for="p-btype">Business type</label><input id="p-btype" name="pbtype" placeholder="e.g. bakery, clinic, online seller" /><small class="err" id="pe-btype"></small></div>
+              <div class="f"><label for="p-industry">Industry <span class="opt">(optional)</span></label><input id="p-industry" name="pindustry" /></div>
+              <div class="f"><label for="p-loc">Business location <span class="opt">(optional)</span></label><input id="p-loc" name="ploc" autocomplete="address-level2" /></div>
+            </fieldset>
+            <fieldset class="pl-step" tabindex="-1" hidden><legend>What kind of website do you need?</legend><div class="opts" id="o-type"></div><small class="err" id="pe-type"></small></fieldset>
+            <fieldset class="pl-step" tabindex="-1" hidden><legend>Which features do you want? <span class="opt">(choose any)</span></legend><div class="opts" id="o-feat"></div>
+              <div class="f"><label for="p-other">Other custom features <span class="opt">(optional)</span></label><input id="p-other" name="pother" /></div>
+              <p class="note">Online payments, customer accounts, and admin dashboards usually need backend development or third-party services, which affects scope and cost.</p>
+            </fieldset>
+            <fieldset class="pl-step" tabindex="-1" hidden><legend>Budget and timeline</legend>
+              <div class="f"><label for="p-budget">Estimated budget range</label><select id="p-budget" name="pbudget"><option value="">Choose one</option><option>Small project</option><option>Medium project</option><option>Larger project</option><option>Not sure yet</option><option>Let's discuss</option></select><small class="err" id="pe-budget"></small></div>
+              <div class="f"><label for="p-time">Desired completion date or timeframe</label><input id="p-time" name="ptime" placeholder="e.g. within 1 month, or a date" /><small class="err" id="pe-time"></small></div>
+              <div class="f"><label for="p-notes">Additional requirements <span class="opt">(optional)</span></label><textarea id="p-notes" name="pnotes" rows="3"></textarea></div>
+            </fieldset>
+            <fieldset class="pl-step" tabindex="-1" hidden><legend>Your project summary</legend>
+              <pre id="pl-summary" class="summary"></pre>
+              <p class="note">This summary is not a quotation. Final scope, price, and schedule require my review. Nothing is sent until you press Send Inquiry and submit the form.</p>
+              <div class="cta"><button class="btn alt" type="button" id="pl-copy">Copy summary</button><button class="btn alt" type="button" id="pl-dl">Download as text file</button><button class="btn" type="button" id="pl-send">Send Inquiry</button></div>
+              <p id="pl-status" class="form-status" role="status" aria-live="polite"></p>
+            </fieldset>
+            <div class="pl-nav"><button class="btn alt" type="button" id="pl-back">Back</button><button class="btn" type="button" id="pl-next">Next</button></div>
+          </form>
+        </section>
+
         <section id="contact" class="reveal">
-          <h2>Let's build something</h2>
-          <a class="mail" id="mail" href="mailto:Jaypoem0@gmail.com"
-            >Jaypoem0@gmail.com</a
-          >
+          <h2>Let's Build Something Great Together.</h2>
+          <p class="about">Have a website idea for your business? Whether you're starting small or managing an established company, I'd love to hear about your project and explore how I can help.</p>
+          <p class="cta"><a class="btn" href="#inquiry">Start a Project</a> <a class="btn alt" id="call" href="mailto:Jaypoem0@gmail.com?subject=Discovery%20call%20request">Book a Discovery Call</a></p>
+          <a class="mail" id="mail" href="mailto:Jaypoem0@gmail.com">Jaypoem0@gmail.com</a>
           <div class="cta">
-            <button class="btn alt" id="copy">Copy email</button>
-            <a class="btn alt" href="https://github.com/jaypee13e">GitHub</a>
+            <button class="btn alt" id="copy" type="button">Copy email</button>
+            <a class="btn alt" href="https://github.com/jaypee13e" target="_blank" rel="noopener">GitHub</a>
           </div>
+
+          <form id="inquiry" class="form" novalidate>
+            <h3>Project inquiry</h3>
+            <div class="grid">
+              <div class="f"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required /><small class="err" id="e-name"></small></div>
+              <div class="f"><label for="f-email">Email address</label><input id="f-email" name="email" type="email" autocomplete="email" required /><small class="err" id="e-email"></small></div>
+              <div class="f"><label for="f-company">Business or company name <span class="opt">(optional)</span></label><input id="f-company" name="company" autocomplete="organization" /></div>
+              <div class="f"><label for="f-type">Type of website needed</label>
+                <select id="f-type" name="type" required>
+                  <option value="">Choose one</option>
+                  <option>Business website</option><option>Landing page</option><option>Product showcase website</option><option>Website redesign</option><option>Website maintenance</option><option>Something else / not sure yet</option>
+                </select><small class="err" id="e-type"></small></div>
+              <div class="f"><label for="f-budget">Estimated budget <span class="opt">(optional)</span></label><input id="f-budget" name="budget" placeholder="A range, or &quot;not sure yet&quot;" /></div>
+              <div class="f"><label for="f-date">Desired completion date <span class="opt">(optional)</span></label><input id="f-date" name="date" type="date" /><small class="err" id="e-date"></small></div>
+            </div>
+            <div class="f"><label for="f-msg">Project description</label><textarea id="f-msg" name="message" rows="5" required placeholder="What does your business do, and what should the website help you achieve?"></textarea><small class="err" id="e-message"></small></div>
+            <div class="hp" aria-hidden="true"><label>Leave this empty <input name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+            <button class="btn" type="submit" id="send">Send inquiry</button>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <p class="about small">Portfolio: <a href="https://jaypee13e.github.io/Portfolioo/">jaypee13e.github.io/Portfolioo</a></p>
         </section>
       </main>
+
       <footer>
         © <span id="yr">2026</span> Jaypee.
       </footer>
