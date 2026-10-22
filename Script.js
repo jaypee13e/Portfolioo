@@ -165,3 +165,167 @@
     hero.addEventListener("pointerleave", () => { stage.style.setProperty("--px", 0); stage.style.setProperty("--py", 0); });
   }
 })();
+
+// ---- Mobile menu ----
+(() => {
+  const btn = document.getElementById("menu");
+  const nav = document.getElementById("nav");
+  if (!btn || !nav) return;
+  const set = (open) => {
+    nav.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open);
+    btn.textContent = open ? "Close" : "Menu";
+  };
+  btn.addEventListener("click", () => set(!nav.classList.contains("open")));
+  nav.addEventListener("click", (e) => e.target.closest("a") && set(false));
+  addEventListener("keydown", (e) => e.key === "Escape" && set(false));
+})();
+
+// ---- Project inquiry form ----
+// SETUP: paste your Formspree endpoint here (see README), e.g. "https://formspree.io/f/abcdwxyz".
+// While this is empty, the form opens a pre-filled email draft instead (nothing is sent automatically).
+const FORM_ENDPOINT = "";
+const CONTACT_EMAIL = "Jaypoem0@gmail.com";
+// SETUP: paste your scheduling link (Calendly, Cal.com, etc.) to turn on "Book a Discovery Call". While empty, it opens an email request instead.
+const SCHEDULING_URL = "";
+
+(() => {
+  const form = document.getElementById("inquiry");
+  if (!form) return;
+  const status = document.getElementById("form-status");
+  const send = document.getElementById("send");
+  const dateEl = form.elements.date;
+  const today = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+  dateEl.min = today;
+
+  // "Request a Quote" buttons pre-select the website type
+  document.querySelectorAll("a[data-type]").forEach((a) =>
+    a.addEventListener("click", () => { form.elements.type.value = a.dataset.type; }),
+  );
+
+  const rules = {
+    name: (v) => (v.trim().length < 2 ? "Please enter your full name." : ""),
+    email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? "" : "Please enter a valid email address, like name@example.com."),
+    type: (v) => (v ? "" : "Please choose the type of website you need."),
+    date: (v) => (v && v < today ? "Please choose today or a future date." : ""),
+    message: (v) => (v.trim().length < 20 ? "Please describe your project in at least 20 characters." : ""),
+  };
+  const check = (name) => {
+    const el = form.elements[name], msg = rules[name](el.value);
+    document.getElementById("e-" + name).textContent = msg;
+    el.setAttribute("aria-invalid", msg ? "true" : "false");
+    msg ? el.setAttribute("aria-describedby", "e-" + name) : el.removeAttribute("aria-describedby");
+    return msg;
+  };
+  Object.keys(rules).forEach((n) => form.elements[n].addEventListener("blur", () => check(n)));
+  const say = (text, kind) => { status.textContent = text; status.className = "form-status " + kind; };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.textContent = ""; status.className = "form-status";
+    const bad = Object.keys(rules).filter((n) => check(n));
+    if (bad.length) {
+      form.elements[bad[0]].focus();
+      return say("Please fix the " + (bad.length > 1 ? bad.length + " fields" : "field") + " marked above and try again.", "bad");
+    }
+    if (form.elements._gotcha.value) return; // spam bot
+
+    const f = Object.fromEntries(new FormData(form));
+    if (!FORM_ENDPOINT) {
+      const body = ["Name: " + f.name, "Email: " + f.email, "Business: " + (f.company || "-"), "Website type: " + f.type, "Budget: " + (f.budget || "-"), "Desired completion date: " + (f.date || "-"), "", f.message].join("\n");
+      location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Website project inquiry from " + f.name) + "&body=" + encodeURIComponent(body);
+      return say("Your email app should open with your inquiry filled in. Nothing has been sent yet: press Send in your email app. If nothing opened, email " + CONTACT_EMAIL + " directly.", "ok");
+    }
+
+    send.disabled = true; send.textContent = "Sending…";
+    try {
+      const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(f) });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      form.reset();
+      say("Thank you! Your inquiry was sent. I'll reply to " + f.email + " soon.", "ok");
+    } catch {
+      say("Your inquiry could not be sent. Please try again, or email " + CONTACT_EMAIL + " directly.", "bad");
+    } finally {
+      send.disabled = false; send.textContent = "Send inquiry";
+    }
+  });
+})();
+
+// ---- Discovery call button ----
+(() => {
+  const a = document.getElementById("call");
+  if (a && SCHEDULING_URL) { a.href = SCHEDULING_URL; a.target = "_blank"; a.rel = "noopener"; }
+})();
+
+// ---- Plan Your Website ----
+(() => {
+  const f = document.getElementById("planner-form");
+  if (!f) return;
+  const TYPES = ["Business website", "Landing page", "Portfolio website", "Product showcase", "Online store", "Restaurant or café website", "Booking website", "Website redesign", "Other"];
+  const FEATS = ["About and services sections", "Product or service gallery", "Contact form", "Booking or appointment feature", "Blog", "Online payments", "Customer accounts", "Admin dashboard"];
+  const MAP = { "Portfolio website": "Business website", "Restaurant or café website": "Business website", "Product showcase": "Product showcase website", "Online store": "Product showcase website", "Booking website": "Something else / not sure yet", "Other": "Something else / not sure yet" };
+  const opt = (t, n, name, i) => `<label><input type="${t}" name="${name}" value="${n}" ${i}/> ${n}</label>`;
+  document.getElementById("o-type").innerHTML = TYPES.map((n) => opt("radio", n, "ptype", "")).join("");
+  document.getElementById("o-feat").innerHTML = FEATS.map((n) => opt("checkbox", n, "pfeat", "")).join("");
+
+  const steps = [...f.querySelectorAll(".pl-step")];
+  const back = document.getElementById("pl-back"), next = document.getElementById("pl-next");
+  const status = document.getElementById("pl-status");
+  const v = (n) => f.elements[n].value.trim();
+  const picked = (n) => [...f.querySelectorAll(`[name="${n}"]:checked`)].map((e) => e.value);
+  const bad = (id, msg) => { document.getElementById(id).textContent = msg; return !!msg; };
+  const checks = [
+    () => [bad("pe-company", v("pcompany") ? "" : "Enter your business or company name."), bad("pe-btype", v("pbtype") ? "" : "Enter your business type.")].some(Boolean),
+    () => bad("pe-type", picked("ptype").length ? "" : "Choose the type of website you need."),
+    () => false,
+    () => [bad("pe-budget", v("pbudget") ? "" : "Choose a budget range."), bad("pe-time", v("ptime") ? "" : "Enter a timeframe or date.")].some(Boolean),
+  ];
+  const summary = () => {
+    const feats = picked("pfeat").concat(v("pother") ? ["Other: " + v("pother")] : []);
+    return ["WEBSITE PROJECT SUMMARY (draft, not a quotation)", "",
+      "Business: " + v("pcompany"), "Business type: " + v("pbtype"), "Industry: " + (v("pindustry") || "-"), "Location: " + (v("ploc") || "-"), "",
+      "Website type: " + picked("ptype")[0], "Features: " + (feats.join(", ") || "None selected yet"), "",
+      "Estimated budget range: " + v("pbudget"), "Desired timeframe: " + v("ptime"), "Additional notes: " + (v("pnotes") || "-"), "",
+      "Final scope, price, and schedule require review by Jaypee."].join("\n");
+  };
+  let cur = 0;
+  const show = (n) => {
+    cur = n;
+    steps.forEach((s, i) => (s.hidden = i !== n));
+    document.getElementById("pl-prog").textContent = "Step " + (n + 1) + " of 5";
+    document.getElementById("pl-bar").value = n + 1;
+    back.disabled = n === 0;
+    next.hidden = n === 4;
+    status.textContent = ""; status.className = "form-status";
+    if (n === 4) document.getElementById("pl-summary").textContent = summary();
+    if (n > 0 || f.dataset.started) steps[n].focus({ preventScroll: true });
+    f.dataset.started = "1";
+  };
+  next.addEventListener("click", () => { if (!checks[cur]()) show(cur + 1); });
+  back.addEventListener("click", () => cur > 0 && show(cur - 1));
+  f.addEventListener("submit", (e) => { e.preventDefault(); next.click(); });
+  const say = (t, k) => { status.textContent = t; status.className = "form-status " + k; };
+
+  document.getElementById("pl-copy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(summary()); say("Summary copied.", "ok"); }
+    catch { say("Copy was blocked by your browser. Select the summary text above and copy it manually.", "bad"); }
+  });
+  document.getElementById("pl-dl").addEventListener("click", () => {
+    const url = URL.createObjectURL(new Blob([summary()], { type: "text/plain" }));
+    const a = Object.assign(document.createElement("a"), { href: url, download: "website-project-summary.txt" });
+    document.body.append(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    say("Summary downloaded as website-project-summary.txt.", "ok");
+  });
+  document.getElementById("pl-send").addEventListener("click", () => {
+    const q = document.getElementById("inquiry").elements;
+    q.company.value = v("pcompany");
+    q.type.value = MAP[picked("ptype")[0]] || picked("ptype")[0];
+    q.budget.value = v("pbudget");
+    q.message.value = summary();
+    document.getElementById("inquiry").scrollIntoView({ behavior: "smooth" });
+    q.name.focus({ preventScroll: true });
+    document.getElementById("form-status").textContent = "Your planner answers are filled in below. Add your name and email, then send the inquiry.";
+    document.getElementById("form-status").className = "form-status ok";
+  });
+  show(0);
+})();
