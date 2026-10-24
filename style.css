@@ -709,3 +709,28 @@ img.shot { height: auto; }
 .pl-nav button[hidden] { display: none; }
 .planner .cta { margin-top: 0; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---- Clients & reviews ---- */
+.rv-summary { margin: -0.8rem 0 1.6rem; font-weight: 700; color: var(--mute); }
+.rv-empty { max-width: 36rem; margin: 0; font-size: 1.15rem; }
+.rv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1.4rem; }
+.rv-grid[hidden], .rv-summary[hidden], .rv-empty[hidden] { display: none; }
+.review { display: flex; flex-direction: column; gap: 0.9rem; margin: 0; padding: 1.4rem; border: 2px solid var(--ink); border-radius: 0.8rem; background: var(--panel); box-shadow: 0.4rem 0.4rem 0 var(--accent); transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+.review:hover { transform: translate(-3px, -3px); box-shadow: 0.7rem 0.7rem 0 var(--accent); }
+.review .stars { color: var(--accent); font-size: 1.3rem; letter-spacing: 0.1em; }
+.review blockquote { margin: 0; flex: 1; font-size: 1.1rem; line-height: 1.5; }
+.review blockquote::before { content: "\201C"; }
+.review blockquote::after { content: "\201D"; }
+.review figcaption { display: flex; flex-direction: column; gap: 0.15rem; padding-top: 0.9rem; border-top: 1px solid var(--line); font-size: 0.95rem; color: var(--mute); }
+.review figcaption b { color: var(--ink); font-size: 1.05rem; }
+.review .rv-work { font-weight: 600; }
+.review .link { align-self: flex-start; margin-top: 0.4rem; }
+#review-form { margin-top: 3rem; }
+.rv-rate { border: 0; padding: 0; min-width: 0; }
+.rv-rate legend { padding: 0; margin-bottom: 0.3rem; font-weight: 700; font-size: 0.95rem; }
+.rv-rate .opts { margin-bottom: 0.3rem; }
+.rv-rate .opts span { color: var(--accent); letter-spacing: 0.05em; }
+.rv-rate .opts label:has(input:checked) span { color: var(--accent-ink); }
+.rv-consent { display: flex !important; align-items: flex-start; gap: 0.6rem; font-weight: 500 !important; }
+.rv-consent input { width: 1.2rem; height: 1.2rem; margin-top: 0.2rem; flex: none; accent-color: var(--accent); }
+@media (max-width: 46rem) { .rv-grid { grid-template-columns: 1fr; } }
