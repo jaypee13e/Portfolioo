@@ -40,6 +40,7 @@
         <b>Jaypee</b>
         <nav id="nav" aria-label="Primary">
           <a class="hide" href="#work">Projects</a>
+          <a class="hide" href="#clients">Clients</a>
           <a class="hide" href="#services">Services</a>
           <a class="hide" href="#process">Process</a>
           <a class="hide" href="#pricing">Packages</a>
@@ -655,6 +656,34 @@
           </details>
         </section>
 
+        <section id="clients" class="reveal">
+          <h2>Clients &amp; reviews<small>What people say after working with me.</small></h2>
+          <p class="rv-summary" id="rv-summary" hidden></p>
+          <div class="rv-grid" id="rv-grid"></div>
+          <p class="rv-empty" id="rv-empty" hidden>No public reviews yet. If you've worked with me, I'd be glad to hear how it went.</p>
+
+          <form id="review-form" class="form" novalidate>
+            <h3>Worked with me? Leave a review</h3>
+            <p class="note">Reviews are checked by me before they appear on this page. Nothing is published automatically.</p>
+            <div class="grid">
+              <div class="f"><label for="r-name">Your name</label><input id="r-name" name="name" autocomplete="name" required /><small class="err" id="re-name"></small></div>
+              <div class="f"><label for="r-email">Email address <span class="opt">(not shown publicly)</span></label><input id="r-email" name="email" type="email" autocomplete="email" required /><small class="err" id="re-email"></small></div>
+              <div class="f"><label for="r-business">Business or company <span class="opt">(optional)</span></label><input id="r-business" name="business" autocomplete="organization" /></div>
+              <div class="f"><label for="r-work">What did I build for you?</label><input id="r-work" name="work" placeholder="e.g. business website, landing page" required /><small class="err" id="re-work"></small></div>
+            </div>
+            <fieldset class="f rv-rate">
+              <legend>Your rating</legend>
+              <div class="opts" id="r-rating"></div>
+              <small class="err" id="re-rating"></small>
+            </fieldset>
+            <div class="f"><label for="r-text">Your review</label><textarea id="r-text" name="quote" rows="5" required placeholder="What was it like working together? What did you get out of it?"></textarea><small class="err" id="re-quote"></small></div>
+            <div class="f"><label class="rv-consent"><input type="checkbox" name="consent" id="r-consent" /> I agree that my name, business and review may be shown on this website.</label><small class="err" id="re-consent"></small></div>
+            <div class="hp" aria-hidden="true"><label>Leave this empty <input name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+            <button class="btn" type="submit" id="r-send">Send review</button>
+            <p id="r-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
         <section id="services" class="reveal">
           <h2>Services<small>What you can hire me to build.</small></h2>
           <div class="cols">
@@ -800,6 +829,7 @@
             <button class="btn" type="submit" id="send">Send inquiry</button>
             <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
           </form>
+        </section>
       </main>
 
       <footer>
@@ -807,6 +837,7 @@
       </footer>
     </div>
 
+    <script src="reviews.js" defer></script>
     <script src="Script.js" defer></script>
   </body>
 </html>
