@@ -329,3 +329,119 @@ const SCHEDULING_URL = "";
   });
   show(0);
 })();
+
+// ---- Clients & reviews ----
+// Reviews shown on the page come from reviews.js (window.CLIENT_REVIEWS).
+(() => {
+  const grid = document.getElementById("rv-grid");
+  if (!grid) return;
+  const list = (Array.isArray(window.CLIENT_REVIEWS) ? window.CLIENT_REVIEWS : [])
+    .filter((r) => r && r.name && r.quote && r.work && r.rating >= 1 && r.rating <= 5);
+
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  };
+  const stars = (n) => {
+    const s = el("span", "stars", "★".repeat(Math.round(n)) + "☆".repeat(5 - Math.round(n)));
+    s.setAttribute("role", "img");
+    s.setAttribute("aria-label", Math.round(n) + " out of 5 stars");
+    return s;
+  };
+
+  // Cards (text is always set with textContent, never as HTML)
+  list.forEach((r) => {
+    const card = el("figure", "review");
+    card.append(stars(r.rating));
+    const q = el("blockquote", "", r.quote);
+    const cap = el("figcaption");
+    cap.append(el("b", "", r.name));
+    if (r.business) cap.append(el("span", "", r.business));
+    const work = el("span", "rv-work", "Worked on: " + r.work + (r.date ? " · " + r.date : ""));
+    cap.append(work);
+    if (r.url && /^https?:\/\//i.test(r.url)) {
+      const a = el("a", "link", "View the website");
+      a.href = r.url; a.target = "_blank"; a.rel = "noopener";
+      cap.append(a);
+    }
+    card.append(q, cap);
+    grid.append(card);
+  });
+
+  // Summary line or empty state
+  const sum = document.getElementById("rv-summary");
+  const empty = document.getElementById("rv-empty");
+  if (list.length) {
+    const avg = list.reduce((t, r) => t + r.rating, 0) / list.length;
+    sum.textContent = avg.toFixed(1) + " out of 5 from " + list.length + (list.length === 1 ? " review" : " reviews");
+    sum.hidden = false;
+  } else {
+    grid.hidden = true;
+    empty.hidden = false;
+  }
+
+  // Review form
+  const form = document.getElementById("review-form");
+  const status = document.getElementById("r-status");
+  const send = document.getElementById("r-send");
+  const RATES = [[5, "Excellent"], [4, "Very good"], [3, "Good"], [2, "Fair"], [1, "Poor"]];
+  document.getElementById("r-rating").innerHTML = RATES.map(([n, t]) =>
+    `<label><input type="radio" name="rating" value="${n}" /> <span aria-hidden="true">${"★".repeat(n)}</span> ${t}</label>`).join("");
+
+  const rules = {
+    name: (v) => (v.trim().length < 2 ? "Please enter your name." : ""),
+    email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? "" : "Please enter a valid email address, like name@example.com."),
+    work: (v) => (v.trim().length < 3 ? "Please tell me what I built for you." : ""),
+    rating: () => (form.querySelector('[name="rating"]:checked') ? "" : "Please choose a rating."),
+    quote: (v) => (v.trim().length < 20 ? "Please write at least 20 characters." : ""),
+    consent: () => (form.elements.consent.checked ? "" : "Please confirm that I may show your review."),
+  };
+  const check = (n) => {
+    const msg = rules[n](form.elements[n] && form.elements[n].value !== undefined ? form.elements[n].value : "");
+    document.getElementById("re-" + n).textContent = msg;
+    const field = form.elements[n];
+    if (field && field.setAttribute && field.type !== "checkbox") field.setAttribute("aria-invalid", msg ? "true" : "false");
+    return msg;
+  };
+  Object.keys(rules).forEach((n) => {
+    const field = form.elements[n];
+    if (field && field.addEventListener) field.addEventListener("blur", () => check(n));
+  });
+  form.querySelectorAll('[name="rating"]').forEach((i) => i.addEventListener("change", () => check("rating")));
+  form.elements.consent.addEventListener("change", () => check("consent"));
+  const say = (t, k) => { status.textContent = t; status.className = "form-status " + k; };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.textContent = ""; status.className = "form-status";
+    const bad = Object.keys(rules).filter((n) => check(n));
+    if (bad.length) {
+      const first = bad[0] === "rating" ? form.querySelector('[name="rating"]') : form.elements[bad[0]];
+      first.focus();
+      return say("Please fix the " + (bad.length > 1 ? bad.length + " fields" : "field") + " marked above and try again.", "bad");
+    }
+    if (form.elements._gotcha.value) return; // spam bot
+
+    const f = Object.fromEntries(new FormData(form));
+    f.form = "client-review";
+    if (!FORM_ENDPOINT) {
+      const body = ["CLIENT REVIEW", "", "Name: " + f.name, "Email: " + f.email, "Business: " + (f.business || "-"), "Work done: " + f.work, "Rating: " + f.rating + " / 5", "", f.quote, "", "I agree my name, business and review may be shown on the website."].join("\n");
+      location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Client review from " + f.name) + "&body=" + encodeURIComponent(body);
+      return say("Your email app should open with your review filled in. Nothing has been sent yet: press Send in your email app. If nothing opened, email " + CONTACT_EMAIL + " directly.", "ok");
+    }
+
+    send.disabled = true; send.textContent = "Sending…";
+    try {
+      const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(f) });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      form.reset();
+      say("Thank you! Your review was sent. It will appear on this page after I check it.", "ok");
+    } catch {
+      say("Your review could not be sent. Please try again, or email " + CONTACT_EMAIL + " directly.", "bad");
+    } finally {
+      send.disabled = false; send.textContent = "Send review";
+    }
+  });
+})();
