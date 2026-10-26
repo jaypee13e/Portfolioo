@@ -74,23 +74,54 @@
     deck.after(ctl);
     const dots = ctl.querySelector(".dots"), count = ctl.querySelector(".count");
     slides.forEach((_, i) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Project " + (i + 1)); b.onclick = () => go(i); dots.append(b); });
-    let cur = 0;
+
+    // Project tabs: jump straight to any project
+    const tabs = document.createElement("div");
+    tabs.className = "deck-tabs";
+    tabs.setAttribute("role", "tablist");
+    tabs.setAttribute("aria-label", "Choose a project");
+    slides.forEach((d, i) => {
+      const name = d.querySelector("summary .t").textContent.replace(/^Project:\s*/, "").replace(/\s*\(\d{4}\)\s*$/, "").replace(/-/g, " ");
+      const b = document.createElement("button");
+      b.type = "button"; b.setAttribute("role", "tab"); b.textContent = name;
+      b.onclick = () => go(i);
+      tabs.append(b);
+    });
+    deck.before(tabs);
+
+    let cur = 0, heightTimer = 0, first = true;
+    const padV = () => { const c = getComputedStyle(deck); return ["paddingTop", "paddingBottom", "borderTopWidth", "borderBottomWidth"].reduce((t, k) => t + parseFloat(c[k]), 0); };
     function go(n) {
       const next = (n + slides.length) % slides.length;
+      const from = deck.offsetHeight;
       deck.dataset.dir = n >= cur ? "next" : "prev";
       slides.forEach((s, i) => s.classList.toggle("active", i === next));
       [...dots.children].forEach((b, i) => b.classList.toggle("on", i === next));
+      [...tabs.children].forEach((b, i) => { b.classList.toggle("on", i === next); b.setAttribute("aria-selected", i === next); });
+      const on = tabs.children[next];
+      if (on) tabs.scrollTo({ left: on.offsetLeft - (tabs.clientWidth - on.offsetWidth) / 2, behavior: first ? "auto" : "smooth" });
       count.textContent = String(next + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
       cur = next;
+      // Smoothly animate the card to the new project's height (no jump)
+      if (!first && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const to = slides[next].offsetHeight + padV();
+        deck.style.height = from + "px";
+        deck.getBoundingClientRect();
+        deck.style.height = to + "px";
+        clearTimeout(heightTimer);
+        heightTimer = setTimeout(() => { deck.style.height = ""; }, 650);
+      }
+      first = false;
     }
+    addEventListener("resize", () => { deck.style.height = ""; });
     ctl.addEventListener("click", (e) => { const a = e.target.closest(".arrow"); a && go(cur + +a.dataset.d); });
-    work.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") go(cur + 1); if (e.key === "ArrowLeft") go(cur - 1); });
+    work.addEventListener("keydown", (e) => { if (e.target.closest("input, textarea, select")) return; if (e.key === "ArrowRight") go(cur + 1); if (e.key === "ArrowLeft") go(cur - 1); });
     let x0 = null;
     deck.addEventListener("pointerdown", (e) => (x0 = e.clientX));
     deck.addEventListener("pointerup", (e) => { if (x0 !== null && Math.abs(e.clientX - x0) > 60) go(cur + (e.clientX < x0 ? 1 : -1)); x0 = null; });
     go(0);
     const sub = work.querySelector("h2 small");
-    if (sub) sub.textContent = "Selected work. Use the arrows to browse.";
+    if (sub) sub.textContent = "Selected portfolio demos. They are not real client sites. Pick a project below or use the arrows.";
   }
 })();
 
@@ -451,11 +482,44 @@ const SCHEDULING_URL = "";
 (() => {
   if (!matchMedia("(pointer: fine)").matches) return;
   const sel = ".cols > div, .cols > li, .review, .form, .deck";
+  let raf = 0, last = null;
   document.addEventListener("pointermove", (e) => {
     const card = e.target.closest && e.target.closest(sel);
     if (!card) return;
-    const r = card.getBoundingClientRect();
-    card.style.setProperty("--mx", e.clientX - r.left + "px");
-    card.style.setProperty("--my", e.clientY - r.top + "px");
+    last = { card, x: e.clientX, y: e.clientY };
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const r = last.card.getBoundingClientRect();
+      last.card.style.setProperty("--mx", last.x - r.left + "px");
+      last.card.style.setProperty("--my", last.y - r.top + "px");
+    });
   }, { passive: true });
+})();
+
+// ---- Reviews: hide the whole section until there is a real review ----
+(() => {
+  const sec = document.getElementById("clients");
+  const link = document.getElementById("leave-review");
+  if (!sec) return;
+  const hasReviews = Array.isArray(window.CLIENT_REVIEWS) && window.CLIENT_REVIEWS.some((r) => r && r.name && r.quote);
+  if (!hasReviews) sec.hidden = true;
+  if (link) link.addEventListener("click", (e) => {
+    if (!sec.hidden) return;            // section already visible: normal jump
+    e.preventDefault();
+    sec.hidden = false;
+    sec.classList.add("in");
+    sec.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  if (!hasReviews && link === null) return;
+  // Visiting /#clients directly also opens it
+  if (location.hash === "#clients") { sec.hidden = false; sec.classList.add("in"); }
+})();
+
+
+// ---- Forms: clicking a button must never be lost to a layout shift ----
+// (When a field loses focus its message can appear or clear, which used to nudge the button
+// away mid-click so the first click did nothing.)
+(() => {
+  document.querySelectorAll(".form button").forEach((b) => b.addEventListener("mousedown", (e) => e.preventDefault()));
 })();
