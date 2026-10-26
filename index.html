@@ -14,30 +14,30 @@
     <meta property="og:url" content="https://jaypee13e.github.io/Portfolioo/" />
     <meta property="og:image" content="https://jaypee13e.github.io/Portfolioo/jaypee.png" />
     <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#060912" />
     <meta
       property="og:description"
       content="Responsive, professional websites for businesses of all sizes. See my projects and request a quote."
     />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>"
-    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23070b14%27/%3E%3Ctext x=%2732%27 y=%2742%27 font-size=%2728%27 font-family=%27monospace%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%2339e0ff%27%3EJP%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <script>
       document.documentElement.className += " js";
+      try { document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark"; } catch (e) { document.documentElement.dataset.theme = "dark"; }
     </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="progress" id="bar"></div>
+    <div class="bg-fx" aria-hidden="true"></div>
     <div class="wrap">
       <header class="top">
-        <b>Jaypee</b>
+        <a class="logo" href="#top" aria-label="Jaypee, back to top"><span class="logo-mark">JP</span><b>Jaypee</b></a>
         <nav id="nav" aria-label="Primary">
           <a class="hide" href="#work">Projects</a>
           <a class="hide" href="#clients">Clients</a>
@@ -56,10 +56,10 @@
         </div>
       </header>
 
-      <main>
+      <main id="top">
         <div class="hero">
           <div>
-            <p class="kicker">Jaypee, freelance web developer</p>
+            <p class="kicker"><span class="blip"></span>Jaypee / freelance web developer / Philippines</p>
             <h1 id="name"><span>I Build Websites for</span> <span>Businesses of All Sizes.</span></h1>
             <p class="lede">
               I create modern, responsive, and professional websites that help businesses showcase their services, reach more customers, and grow their online presence — whether you're a small startup or an established company.
@@ -69,6 +69,11 @@
               <a class="btn" href="#work">View My Projects</a>
               <a class="btn alt" href="#contact">Let's Build Your Website</a>
             </div>
+            <dl class="stats" aria-label="At a glance">
+              <div><dt>Projects</dt><dd>10</dd></div>
+              <div><dt>Building since</dt><dd>2024</dd></div>
+              <div><dt>Stack</dt><dd>React · Node</dd></div>
+            </dl>
           </div>
           <div class="stage">
             <button
@@ -88,7 +93,8 @@
                 alt="Portrait of Jaypee, freelance web developer"
               />
             </picture>
-            <span class="rec-cap" id="recCap">Press the record to play</span>
+            <span class="hud hud-a" aria-hidden="true">SYS.ONLINE</span><span class="hud hud-b" aria-hidden="true">JP / 2026</span>
+            <span class="rec-cap" id="recCap">Tap the ring to play music</span>
             <audio id="music" src="audio/theme.mp3" loop preload="none"></audio>
           </div>
         </div>
@@ -152,12 +158,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="123.png" width="2200" height="1701"
                 alt="Screenshot of the Demo Community feed with posts, likes and comments"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -213,12 +219,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="1234.png" width="1400" height="745"
                 alt="Screenshot of the Demo Openbook events calendar and booking page"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -280,12 +286,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="12345.png" width="1400" height="745"
                 alt="Screenshot of the Demo Budget Tracker dashboard with income, expenses and charts"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -333,12 +339,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="4.png" width="1400" height="745"
                 alt="Screenshot of the Hearth &amp; Crumb bakery homepage"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -386,12 +392,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="5.png" width="1400" height="745"
                 alt="Screenshot of the Ember &amp; Pine candle shop homepage"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -439,12 +445,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="6.png" width="1400" height="745"
                 alt="Screenshot of the Northgate Realty homepage with the headline Find the home that fits your life"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -491,12 +497,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="7.png" width="1400" height="745"
                 alt="Screenshot of the Hale &amp; Okafor accounting homepage"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -543,12 +549,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="8.png" width="1400" height="745"
                 alt="Screenshot of the Brightwater Dental clinic homepage"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -595,12 +601,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="9.png" width="1400" height="745"
                 alt="Screenshot of the Ironleaf fitness studio homepage"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
 
@@ -646,12 +652,12 @@
                   >
                 </p>
               </div>
-              <img
+              <figure class="frame"><div class="bar"><i></i><i></i><i></i></div><img
                 class="shot"
                 src="10.png" width="1400" height="745"
                 alt="Screenshot of the Gearhouse Auto Care homepage"
                 loading="lazy"
-              />
+              /></figure>
             </div>
           </details>
         </section>
@@ -833,7 +839,8 @@
       </main>
 
       <footer>
-        © <span id="yr">2026</span> Jaypee.
+        <span>© <span id="yr">2026</span> Jaypee. Built by hand with HTML, CSS and JavaScript.</span>
+        <a href="#top">Back to top ↑</a>
       </footer>
     </div>
 
