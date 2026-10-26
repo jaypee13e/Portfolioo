@@ -108,8 +108,8 @@
     rec.setAttribute("aria-pressed", on);
     rec.setAttribute("aria-label", on ? "Pause music" : "Play music");
     cap.textContent = on
-      ? "Now playing. Press to pause"
-      : "Press the record to play";
+      ? "Now playing. Tap to pause"
+      : "Tap the ring to play music";
   };
 
   rec.addEventListener("click", async () => {
@@ -444,4 +444,18 @@ const SCHEDULING_URL = "";
       send.disabled = false; send.textContent = "Send review";
     }
   });
+})();
+
+
+// ---- Futuristic touch: soft spotlight that follows the pointer on cards ----
+(() => {
+  if (!matchMedia("(pointer: fine)").matches) return;
+  const sel = ".cols > div, .cols > li, .review, .form, .deck";
+  document.addEventListener("pointermove", (e) => {
+    const card = e.target.closest && e.target.closest(sel);
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", e.clientX - r.left + "px");
+    card.style.setProperty("--my", e.clientY - r.top + "px");
+  }, { passive: true });
 })();
