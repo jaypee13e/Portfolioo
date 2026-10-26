@@ -181,7 +181,7 @@ header.top nav {
 }
 header.top nav a {
   position: relative;
-  padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.75rem;
   border-radius: 0.5rem;
   color: var(--mute);
   font: 500 0.72rem var(--mono);
@@ -666,8 +666,6 @@ h3 {
   background:
     radial-gradient(22rem circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 11%, transparent), transparent 60%),
     var(--panel);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
 }
 .cols {
   display: grid;
@@ -730,6 +728,41 @@ section > .cta {
 .deck {
   overflow: hidden;
   padding: clamp(1.1rem, 3vw, 2rem);
+  transition: height 0.6s var(--ease);
+}
+.deck-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0.2rem 0 0.6rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 2%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 2%, #000 96%, transparent);
+}
+.deck-tabs button {
+  flex: none;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--mute);
+  font: 500 0.74rem var(--mono);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transition: color 0.3s, border-color 0.3s, background 0.3s, transform 0.4s var(--ease);
+}
+.deck-tabs button:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+.deck-tabs button.on {
+  color: var(--accent-ink);
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--accent2)));
+  box-shadow: 0 6px 20px -8px var(--glow);
 }
 .deck .slide {
   display: none;
@@ -1042,7 +1075,11 @@ img.shot {
   gap: 0 1.2rem;
 }
 .f {
-  margin-bottom: 1.1rem;
+  margin-bottom: 1rem;
+}
+/* Reserve room for the error line so the form never jumps when a message appears or clears */
+.f:has(> .err) {
+  margin-bottom: 0.2rem;
 }
 .f label {
   display: block;
@@ -1095,7 +1132,9 @@ img.shot {
 }
 .err {
   display: block;
-  margin-top: 0.35rem;
+  min-height: 1.5rem;
+  margin-top: 0.3rem;
+  line-height: 1.4;
   color: var(--err);
   font-weight: 600;
   font-size: 0.86rem;
@@ -1391,6 +1430,11 @@ footer {
   font: 400 0.72rem var(--mono);
   letter-spacing: 0.06em;
 }
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
+}
 footer a {
   color: var(--accent);
   text-decoration: none;
@@ -1495,5 +1539,19 @@ footer a:hover {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+  }
+}
+
+/* Smoothness: promote only the things that animate constantly */
+.ticker .track,
+.rec::before {
+  will-change: transform;
+}
+.progress {
+  will-change: transform;
+}
+@media (max-width: 46rem) {
+  .deck-tabs {
+    margin-inline: -0.2rem;
   }
 }
